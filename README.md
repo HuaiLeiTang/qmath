@@ -1,7 +1,7 @@
 QMath
 =====
 
-QMath is a matrix library (C++ template classes) for robotic applications. This library is primarily for UNIX systems.
+QMath is a matrix library (C++ template classes) for robotic applications. This library is primarily for UNIX systems. Note: I wrote this library in 2006 when working towards a masters degree in Robotics; hence, most of the classes here are quite dated. You will be better served by other open-source libraries today, for instance, Eigen (http://eigen.tuxfamily.org/). This repository is mostly for my own reference.
 
 
 Introduction
