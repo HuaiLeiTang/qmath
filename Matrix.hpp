@@ -750,10 +750,8 @@ bool operator!=(const Matrix<nr, nc, T> &lhs, const Matrix<nr, nc, T> &rhs)
 //========================================================================  
 
 template<class T>
-Matrix<2, 2, T> inverse( const Matrix<2, 2, T> &mat)
+Matrix<2, 2, T> inverse( const Matrix<2, 2, T> &m)
 {
- Matrix<2,2,T> m(mat); // one temporary to avoid many that follow
- Matrix<2,2,T> A;      // This is the adjoint of matrix m.
  T det = determinant(m);
 	
  if (fabs(det) < 1e-10)
@@ -762,6 +760,7 @@ Matrix<2, 2, T> inverse( const Matrix<2, 2, T> &mat)
   exception.setErrorType(QMathException_singular);
   throw exception;
  }
+ Matrix<2,2,T> A;
  A(1,1) = m(2,2);
  A(1,2) = -m(1,2);
  A(2,1) = -m(2,1);
@@ -770,10 +769,8 @@ Matrix<2, 2, T> inverse( const Matrix<2, 2, T> &mat)
 }
 
 template<class T>
-Matrix<3, 3, T> inverse( const Matrix<3, 3, T> &mat)
+Matrix<3, 3, T> inverse( const Matrix<3, 3, T> &m)
 {
- Matrix<3,3,T> m(mat);  // one temporary to avoid many that follow
- Matrix<3,3,T> A;	// This is the adjoint of matrix m;
  T det = determinant(m);
 
  if (fabs(det) < 1e-10)
@@ -782,6 +779,7 @@ Matrix<3, 3, T> inverse( const Matrix<3, 3, T> &mat)
   exception.setErrorType(QMathException_singular);
   throw exception;
  }
+ Matrix<3,3,T> A;
  A(1,1) = (m(2,2)*m(3,3)-m(2,3)*m(3,2));
  A(1,2) = -(m(1,2)*m(3,3)-m(1,3)*m(3,2));
  A(1,3) = (m(1,2)*m(2,3)-m(1,3)*m(2,2));
@@ -797,10 +795,8 @@ Matrix<3, 3, T> inverse( const Matrix<3, 3, T> &mat)
 	
 
 template<class T>
-Matrix<4, 4, T> inverse( const Matrix<4, 4, T> &mat)
+Matrix<4, 4, T> inverse( const Matrix<4, 4, T> &m)
 {
- Matrix<4,4,T> m(mat);  // one temporary to avoid many that follow
- Matrix<4,4,T> A;	// This is the adjoint matrix;
  T det = determinant(m);
 
  if (fabs(det) < 1e-10)
@@ -809,6 +805,7 @@ Matrix<4, 4, T> inverse( const Matrix<4, 4, T> &mat)
   exception.setErrorType(QMathException_singular);
   throw exception;
  }
+ Matrix<4,4,T> A;	
  A(1,1) = (m(2,2)*m(3,3)*m(4,4)-m(2,2)*m(3,4)*m(4,3)-m(3,2)*m(2,3)*m(4,4)+m(3,2)*m(2,4)*m(4,3)+m(4,2)*m(2,3)*m(3,4)-m(4,2)*m(2,4)*m(3,3));
  A(1,2) = -(m(1,2)*m(3,3)*m(4,4)-m(1,2)*m(3,4)*m(4,3)-m(3,2)*m(1,3)*m(4,4)+m(3,2)*m(1,4)*m(4,3)+m(4,2)*m(1,3)*m(3,4)-m(4,2)*m(1,4)*m(3,3));
  A(1,3) = (m(1,2)*m(2,3)*m(4,4)-m(1,2)*m(2,4)*m(4,3)-m(2,2)*m(1,3)*m(4,4)+m(2,2)*m(1,4)*m(4,3)+m(4,2)*m(1,3)*m(2,4)-m(4,2)*m(1,4)*m(2,3));
@@ -881,25 +878,22 @@ Matrix<size, size, T> inverse( const Matrix<size, size, T> &matrix)
 //========================================================================  
 
 template<class T> 
-T determinant (  const Matrix <2, 2, T> &matrix)
+T determinant (  const Matrix <2, 2, T> &m)
 {
- Matrix<2,2,T> m(matrix);
  return ( m(1,1) * m(2,2) - m(2,1) * m(1,2) );
 }
 
 
 template<class T> 
-T determinant (  const Matrix <3, 3, T> &mat)
+T determinant (  const Matrix <3, 3, T> &m)
 {
- Matrix<3,3,T> m(mat);
  return (m(1,1)*m(2,2)*m(3,3)-m(1,1)*m(2,3)*m(3,2)-m(2,1)*m(1,2)*m(3,3)+m(2,1)
  	*m(1,3)*m(3,2)+m(3,1)*m(1,2)*m(2,3)-m(3,1)*m(1,3)*m(2,2));
 }
 
 template<class T> 
-T determinant (  const Matrix <4, 4, T> &mat)
+T determinant (  const Matrix <4, 4, T> &m)
 {
- Matrix<4,4,T> m(mat);
  return (m(1,1)*m(2,2)*m(3,3)*m(4,4)-m(1,1)*m(2,2)*m(3,4)*m(4,3)-m(1,1)*m(3,2)*m(2,3)*m(4,4)+m(1,1)*m(3,2)*m(2,4)*m(4,3)+m(1,1)
         *m(4,2)*m(2,3)*m(3,4)-m(1,1)*m(4,2)*m(2,4)*m(3,3)-m(2,1)*m(1,2)*m(3,3)*m(4,4)+m(2,1)*m(1,2)*m(3,4)*m(4,3)+m(2,1)*m(3,2)
 	*m(1,3)*m(4,4)-m(2,1)*m(3,2)*m(1,4)*m(4,3)-m(2,1)*m(4,2)*m(1,3)*m(3,4)+m(2,1)*m(4,2)*m(1,4)*m(3,3)+m(3,1)*m(1,2)*m(2,3)
@@ -910,9 +904,8 @@ T determinant (  const Matrix <4, 4, T> &mat)
 
 
 template<class T> 
-T determinant (  const Matrix <5, 5, T> &mat)
+T determinant (  const Matrix <5, 5, T> &m)
 {
- Matrix<5,5,T> m(mat);
  return (
 m(4,1)*m(3,2)*m(2,3)*m(1,4)*m(5,5)-m(2,1)*m(1,2)*m(3,3)*m(4,4)*m(5,5)+
 m(2,1)*m(1,2)*m(3,3)*m(4,5)*m(5,4)+m(2,1)*m(1,2)*m(4,3)*m(3,4)*m(5,5)-

@@ -25,6 +25,7 @@
 #define INCLUDED_VectorBase_hpp
 
 #include <iostream>
+#include <math.h>
 #include "MatrixInitializer.hpp"
 
 //====================================================================
